@@ -21,9 +21,9 @@ void setup() {
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
 
-  // Enable PWM for Motor A and Motor B
-  analogWrite(enA, 200);  // Adjust the speed for Motor A as needed
-  analogWrite(enB, 200);  // Adjust the speed for Motor B as needed
+  /* // Enable PWM for Motor A and Motor B
+  analogWrite(enA, 100);
+  analogWrite(enB, 100);*/
 
   // Set the IR sensor pins as inputs
   pinMode(IR_PIN_1, INPUT);
@@ -37,20 +37,25 @@ void loop() {
 
   // Line-tracking control logic
   if (IR_SEN_1 == 0 && IR_SEN_2 == 0) {
-    // We are following the line correctly; move both motors at max speed.
-    moveMotors(250);
+    // We are following the line correctly; move both motors at the same speed.
+    moveMotors(200);
   } else if (IR_SEN_1 == 0 && IR_SEN_2 == 1) {
     // Turn towards IR sensor 2 for a bit
-    rotateMotors(200, 100);
+    //stop();
+    delay(1000);
+    rotateMotors(100, 0);
   } else if (IR_SEN_1 == 1 && IR_SEN_2 == 0) {
     // Turn towards IR sensor 1 for a bit
-    rotateMotors(100, 200);
+    //stop();
+    delay(1000);
+    rotateMotors(0, 100);
   } else if (IR_SEN_1 == 1 && IR_SEN_2 == 1) {
-    stop();
+    moveMotors(200);
   } else {
-    stop();
+    moveMotors(200);
   }
 }
+
 void moveMotors(int speed) {
   // Move both motors forward
   digitalWrite(in1, HIGH);
@@ -77,8 +82,8 @@ void rotateMotors(int speedA, int speedB) {
   // Rotate motors in opposite directions to achieve rotation
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   // Set speeds for each motor
   analogWrite(enA, speedA);
   analogWrite(enB, speedB);
