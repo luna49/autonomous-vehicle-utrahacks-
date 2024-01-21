@@ -2,14 +2,14 @@
 
 // Define the pins connected to the L298N module
 int enA = 9;
-int in1 = 13;
+int in1 = 8;
 int in2 = 12;
 int enB = 3;
 int in3 = 7;
 int in4 = 4;
 
 // Defining input pins from the ultrasonic sensor
-const int trig = 13;
+const int trig = 10;
 const int echo = 11;
 
 // Defining variables for distance calculation

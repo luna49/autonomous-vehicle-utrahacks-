@@ -3,7 +3,7 @@
 
 // Define the pins connected to the L298N module
 int enA = 9;
-int in1 = 13;
+int in1 = 8;
 int in2 = 12;
 int enB = 3;
 int in3 = 7;
@@ -14,8 +14,8 @@ const int trig = 10;
 const int echo = 11;
 
 // Defining input pins for the IR sensors
-const int IR_PIN_1 = 2;
-const int IR_PIN_2 = 5;
+const int IR_PIN_1 = 13;
+const int IR_PIN_2 = 2;
 
 // Defining variables for distance calculation
 long duration;

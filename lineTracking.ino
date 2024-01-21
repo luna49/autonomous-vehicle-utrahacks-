@@ -2,15 +2,15 @@
 
 // Define the pins connected to the L298N module
 int enA = 9;
-int in1 = 13;
+int in1 = 8;
 int in2 = 12;
 int enB = 3;
 int in3 = 7;
 int in4 = 4;
 
 // Define input pins for both IR sensors
-const int IR_PIN_1 = 2;
-const int IR_PIN_2 = 5;
+const int IR_PIN_1 = 13;
+const int IR_PIN_2 = 2;
 
 void setup() {
   // Set the motor control pins as outputs
