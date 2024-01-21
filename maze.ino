@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
 // Define the pins connected to the L298N module
-int enA = 3;
+int enA = 9;
 int in1 = 13;
 int in2 = 12;
-int enB = 9;
+int enB = 3;
 int in3 = 7;
 int in4 = 4;
 
