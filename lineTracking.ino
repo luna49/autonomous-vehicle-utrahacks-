@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 // Define the pins connected to the L298N module
 int enA = 9;
 int in1 = 8;
@@ -38,17 +36,17 @@ void loop() {
   // Line-tracking control logic
   if (IR_SEN_1 == 0 && IR_SEN_2 == 0) {
     // We are following the line correctly; move both motors at max speed.
-    moveMotors(250);
+    moveMotors(100);
   } else if (IR_SEN_1 == 0 && IR_SEN_2 == 1) {
     // Turn towards IR sensor 2 for a bit
-    rotateMotors(200, 100);
+    rotateMotors(200, 0);
   } else if (IR_SEN_1 == 1 && IR_SEN_2 == 0) {
     // Turn towards IR sensor 1 for a bit
-    rotateMotors(100, 200);
+    rotateMotors(0, 200);
   } else if (IR_SEN_1 == 1 && IR_SEN_2 == 1) {
-    stop();
+    moveMotors(100);
   } else {
-    stop();
+    moveMotors(100);
   }
 }
 void moveMotors(int speed) {
@@ -77,8 +75,8 @@ void rotateMotors(int speedA, int speedB) {
   // Rotate motors in opposite directions to achieve rotation
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
-  digitalWrite(in4, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   // Set speeds for each motor
   analogWrite(enA, speedA);
   analogWrite(enB, speedB);
