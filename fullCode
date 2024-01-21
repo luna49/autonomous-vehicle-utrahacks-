@@ -1,0 +1,79 @@
+#include <Arduino.h>
+
+// Define the pins connected to the L298N module
+int enA = 3;
+int in1 = 8;
+int in2 = 12;
+int enB = 9;
+int in3 = 7;
+int in4 = 4;
+
+const int IR_PIN_1 = 2;  // Replace with the actual pin number
+// const int IR_PIN_2 = 4;
+
+void setup() {
+  // put your setup code here, to run once:
+
+  // Set the motor control pins as outputs
+  pinMode(enA, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+
+  // Enable PWM for Motor A and Motor B
+  analogWrite(enA, 200);  // Adjust the speed for Motor A as needed
+  analogWrite(enB, 200);  // Adjust the speed for Motor B as needed
+
+  // Set the IR sensor pins as inputs
+  pinMode(IR_PIN_1, INPUT);
+  // (IR_PIN_2, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the value from the IR sensors
+  int SEN_1 = digitalRead(IR_PIN_1);
+  // int SEN_2 = digitalRead(IR_PIN_2);
+  // Only perform motor control if the light level is above a threshold
+  if (SEN_1 == 0) {
+    moveMotors(200);
+  } else {
+    // If the light level is below the threshold, stop the motors
+    stop();
+  }
+}
+void moveMotors(int speed) {
+  // Move both motors forward
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  // Set the speed for both motors
+  analogWrite(enA, speed);
+  analogWrite(enB, speed);
+}
+
+void stop() {
+  // Stop both motors
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+  // Set speed to 0 to stop the motors
+  analogWrite(enA, 0);
+  analogWrite(enB, 0);
+}
+
+/*void rotateMotors(int speedA, int speedB, int speedC, int speedD) {
+  // Rotate motors in opposite directions to achieve rotation
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  // Set speeds for each motor
+  analogWrite(enA, speedA);
+  analogWrite(enB, speedB);
+}*/
